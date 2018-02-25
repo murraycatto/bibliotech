@@ -22,9 +22,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="/iron-selector/iron-selector.html">
 <link rel="import" href="/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="/polymer/polymer-element.html">
+<link rel="import" href="/paper-input/paper-input.html">
+<link rel="import" href="/paper-button/paper-button.html">
+<link rel="import" href="/paper-card/paper-card.html">
+<link rel="import" href="/iron-form/iron-form.html">
+<script src="webcomponentsjs/webcomponents-lite.js"></script>
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
+<link rel="lazy-import" href="login-view.html">
+<link rel="lazy-import" href="signup-view.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
 
@@ -82,15 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </app-route>
 
     <app-drawer-layout fullbleed narrow="{{narrow}}">
-      <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="login-view" href="[[rootPath]]login-view">Login</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
-        </iron-selector>
-      </app-drawer>
+      
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
@@ -98,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Bibliotech</div>
           </app-toolbar>
         </app-header>
 
@@ -107,8 +105,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <login-view name="login-view"></login-view>
-          <my-view2 name="view2"></my-view2>
+          <login-view name="login"></login-view>
+          <signup-view name="signup"></signup-view>
           <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
@@ -148,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'login-view';
+        this.page = page || 'login';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -158,7 +156,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl( page + '.html');
+        const resolvedPageUrl = this.resolveUrl( page + '-view.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,

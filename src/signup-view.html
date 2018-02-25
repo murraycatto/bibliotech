@@ -1,35 +1,30 @@
+
 <link rel="import" href="shared-styles.html">
-<dom-module id="login-view">
+<dom-module id="signup-view">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
         padding: 10px;
       }
-      paper-card {
-        --paper-card-header-color: #fff !important;
-        margin-right: auto;
-        margin-left: auto;
-        display: block;
-        float: none;
-        max-width: 500px;
-      }
     </style>
-    <paper-card heading="Login" image="https://cdn-images-1.medium.com/max/800/1*KzV7snhc0TxUi_tRf3ry_w.png" alt="Login">
+    <paper-card heading="Sign up" image="https://cdn-images-1.medium.com/max/2000/1*QSqwaJ427MI6DXByXvRxmg.png" alt="Signup">
       <div class="card-content">
-        <iron-form id="loginForm" on-iron-form-presubmit="_presubmit">
-          <form is="iron-form" method="post" action="/login" enctype="application/json">
+        <iron-form id="signupForm" on-iron-form-presubmit="_presubmit">
+          <form is="iron-form" method="post" action="/Signup" enctype="application/json">
             <paper-input label="Email Address" name="email" type="email"></paper-input>
             <paper-input label="Password" name="password" type="password"></paper-input>
+            <paper-input label="Re-type Password" name="confirm-password" type="password"></paper-input>
             <div align="center">
               <paper-button raised on-tap="_submit" class="green">
-                Login
+                Sign up
               </paper-button>
               OR
               <paper-button class="pink">
-                <a name="signup" href="[[rootPath]]signup">Sign Up</a>
+                <a name="signup" href="[[rootPath]]login">Login</a>
               </paper-button>
             </div>
+
             <pre class="output"></pre>
           </form>
         </iron-form>
@@ -38,16 +33,16 @@
   </template>
   <script>
     HTMLImports.whenReady(() => {
-      class LoginView extends Polymer.Element {
-        static get is() { return 'login-view'; }
+      class SignupView extends Polymer.Element {
+        static get is() { return 'signup-view'; }
         _presubmit(e) {
-          const body = this.$.loginForm.request.body;
+          const body = this.$.signupForm.request.body;
         }
         _submit(){
-          this.$.loginForm.submit();
+          this.$.signupForm.submit();
         }
       }
-      window.customElements.define(LoginView.is, LoginView);
+      window.customElements.define(SignupView.is, SignupView);
     });
   </script>
 </dom-module>
