@@ -47,7 +47,14 @@
           this.$.loginForm.submit();
         }
         _responseHandler(e){
-          console.log(e.detail.response);
+          var response = e.detail.response;
+          var output =  this.$.loginForm.querySelector('.output');
+          output.innerHTML = ""
+          if(response.success === "0"){
+            output.innerHTML = response.error;
+          }else{
+            console.log("Logged In");
+          }
         }
       }
       window.customElements.define(LoginView.is, LoginView);

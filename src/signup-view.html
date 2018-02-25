@@ -1,4 +1,3 @@
-
 <link rel="import" href="shared-styles.html">
 <dom-module id="signup-view">
   <template>
@@ -10,11 +9,13 @@
     </style>
     <paper-card heading="Sign up" image="signup-banner.jpg" alt="Signup">
       <div class="card-content">
-        <iron-form id="signupForm" on-iron-form-presubmit="_presubmit">
+        <iron-form id="signupForm" on-iron-form-presubmit="_presubmit" on-iron-form-response="_responseHandler">
           <form is="iron-form" method="post" action="/signup" enctype="application/json">
             <paper-input label="Email Address" name="email" type="email"></paper-input>
-            <paper-input label="Password" name="password" type="password"></paper-input>
-            <paper-input label="Re-type Password" name="confirm-password" type="password"></paper-input>
+            <match-passwords-validator id="match-passwords-validator" password="[[password]]"></match-passwords-validator>
+            <paper-password-input label="Password" value="{{password}}" name="password"></paper-password-input>
+            <paper-password-input label="Confirm" auto-validate validator="match-passwords-validator" error-message="Passwords need to match">
+            </paper-password-input>
             <div align="center">
               <paper-button raised on-tap="_submit" class="green">
                 Sign up
@@ -40,6 +41,16 @@
         }
         _submit(){
           this.$.signupForm.submit();
+        }
+        _responseHandler(e){
+          var response = e.detail.response;
+          var output =  this.$.signupForm.querySelector('.output');
+          output.innerHTML = ""
+          if(response.success === "0"){
+            output.innerHTML = response.error;
+          }else{
+            console.log("Logged In");
+          }
         }
       }
       window.customElements.define(SignupView.is, SignupView);

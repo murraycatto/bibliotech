@@ -19,15 +19,15 @@ module.exports = function(app,db) {
           			if(insert_err){
           				res.send({'success':'0','error':'an error as occured:'+insert_err});
           			}else{
-          				res.send({'success':'1',result:insert_result.ops[0]})
+          				res.send({'success':'1','result':insert_result.ops[0]})
           			}
           		});
             });
           }else{
-            res.send({'error':'Password cannot be blank'});
+            res.send({'success':'0','error':'Password cannot be blank'});
           }
         }else{
-          res.send({'error':'Email already taken'});
+          res.send({'success':'0','error':'Email already taken'});
         }
       }
     });

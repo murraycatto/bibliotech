@@ -19,7 +19,8 @@
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "iron-form": "PolymerElements/iron-form#^2.2.1",
     "paper-spinner": "PolymerElements/paper-spinner#^2.1.0",
-    "paper-card": "PolymerElements/paper-card#^2.1.0"
+    "paper-card": "PolymerElements/paper-card#^2.1.0",
+    "paper-password-input": "^2.2.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"
