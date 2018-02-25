@@ -1,25 +1,24 @@
 {
-  "name": "bibliotech",
-  "version": "1.0.0",
-  "description": "Design the account creation, login, database and authentication components for Bibliotech's latest product",
-  "main": "index.js",
+  "name": "polymer-starter-kit",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.0",
+    "eslint-plugin-html": "^2.0.0",
+    "nodemon": "^1.15.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npm run lint:javascript && polymer lint",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "test": "polymer test",
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
     "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/murraycatto/bibliotech.git"
-  },
-  "author": "Murray Catto",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/murraycatto/bibliotech/issues"
-  },
-  "homepage": "https://github.com/murraycatto/bibliotech#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^3.0.3"
-  }
+  },
+  "main": "index.js"
+
 }
