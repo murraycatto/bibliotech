@@ -73,30 +73,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+      .logo img{
+        max-width: 150px;
+      }
+      .logo{
+        z-index: 99;
+        pointer-events: all;
+      }
     </style>
 
     <app-location
         route="{{route}}"
         url-space-regex="^[[rootPath]]">
     </app-location>
-
     <app-route
         route="{{route}}"
         pattern="[[rootPath]]:page"
         data="{{routeData}}"
         tail="{{subroute}}">
     </app-route>
-
     <app-drawer-layout fullbleed narrow="{{narrow}}">
-      
-
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
-
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>Bibliotech</div>
+            <div main-title class="logo"><a href="[[rootPath]]"><img src="logo-dark.svg" alt=""></a></div>
           </app-toolbar>
         </app-header>
 
@@ -148,10 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Default to 'view1' in that case.
         this.page = page || 'login';
 
-        // Close a non-persistent drawer when the page & route are changed.
-        if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
-        }
+
       }
 
       _pageChanged(page) {
