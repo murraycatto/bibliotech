@@ -20,5 +20,4 @@
     "mongodb": "^3.0.3"
   },
   "main": "index.js"
-
 }

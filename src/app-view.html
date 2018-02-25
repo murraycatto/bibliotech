@@ -8,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="/polymer/polymer.html">
 <link rel="import" href="/polymer/polymer-element.html">
 <link rel="import" href="/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -27,7 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
 
-<dom-module id="my-app">
+<dom-module id="app-view">
   <template>
     <style>
       :host {
@@ -85,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
+          <a name="login-view" href="[[rootPath]]login-view">Login</a>
           <a name="view2" href="[[rootPath]]view2">View Two</a>
           <a name="view3" href="[[rootPath]]view3">View Three</a>
         </iron-selector>
@@ -106,7 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
+          <login-view name="login-view"></login-view>
           <my-view2 name="view2"></my-view2>
           <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
@@ -120,8 +121,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // preventable, allowing for better scrolling performance.
     Polymer.setPassiveTouchGestures(true);
 
-    class MyApp extends Polymer.Element {
-      static get is() { return 'my-app'; }
+    class AppView extends Polymer.Element {
+      static get is() { return 'app-view'; }
 
       static get properties() {
         return {
@@ -147,7 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'login-view';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -157,7 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        const resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        const resolvedPageUrl = this.resolveUrl( page + '.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,
@@ -170,6 +171,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(AppView.is, AppView);
   </script>
 </dom-module>
