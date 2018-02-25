@@ -7,6 +7,8 @@ const app = express();
 const port = 8000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('./app/views'));
+app.use(express.static('./bower_components'));
+
 // DB
 MongoClient.connect(db.url, function(err, database) {
 	if(err) return console.log(err);
