@@ -9,7 +9,7 @@ module.exports = function(app,db) {
     var query = { email:email };
     db.collection('users').find(query).toArray(function(err, result) {
       if(err){
-        res.send({'error':'an error as occured:'+err});
+        res.send({'success':'0','error':'an error as occured:'+err});
       }else{
         if(result.length === 0){
           if(password){
@@ -17,9 +17,9 @@ module.exports = function(app,db) {
               const user = {email:email, password:hashedPassword};
           		db.collection('users').insert(user,(insert_err,insert_result)=>{
           			if(insert_err){
-          				res.send({'error':'an error as occured:'+insert_err});
+          				res.send({'success':'0','error':'an error as occured:'+insert_err});
           			}else{
-          				res.send(insert_result.ops[0])
+          				res.send({'success':'1',result:insert_result.ops[0]})
           			}
           		});
             });
@@ -39,22 +39,22 @@ module.exports = function(app,db) {
     var query = { email:email };
     db.collection('users').find(query).toArray(function(err, result) {
       if(err){
-        res.send({'error':'an error as occured:'+err});
+        res.send({'success':'0','error':'an error as occured:'+err});
       }else{
         if(result.length > 0){
           if(password){
             bcrypt.compare(password, result[0].password, function(err, hash_res) {
               if(hash_res) {
-                res.send(result[0])
+                res.send({'success':'1','result':result[0]});
               } else {
-                res.send({'error':'Invalid password'});
+                res.send({'success':'0','error':'Invalid password'});
               }
             });
           }else{
-            res.send({'error':'Password cannot be blank'});
+            res.send({'success':'0','error':'Password cannot be blank'});
           }
         }else{
-          res.send({'error':'User not found'});
+          res.send({'success':'0','error':'User not found'});
         }
       }
     });

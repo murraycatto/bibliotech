@@ -15,9 +15,9 @@
         max-width: 500px;
       }
     </style>
-    <paper-card heading="Login" image="https://cdn-images-1.medium.com/max/800/1*KzV7snhc0TxUi_tRf3ry_w.png" alt="Login">
+    <paper-card heading="Login" image="login-banner.jpg" alt="Login">
       <div class="card-content">
-        <iron-form id="loginForm" on-iron-form-presubmit="_presubmit">
+        <iron-form id="loginForm" on-iron-form-presubmit="_presubmit" on-iron-form-response="_responseHandler">
           <form is="iron-form" method="post" action="/login" enctype="application/json">
             <paper-input label="Email Address" name="email" type="email"></paper-input>
             <paper-input label="Password" name="password" type="password"></paper-input>
@@ -45,6 +45,9 @@
         }
         _submit(){
           this.$.loginForm.submit();
+        }
+        _responseHandler(e){
+          console.log(e.detail.response);
         }
       }
       window.customElements.define(LoginView.is, LoginView);
