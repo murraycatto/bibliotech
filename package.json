@@ -1,0 +1,19 @@
+{
+  "name": "bibliotech",
+  "version": "1.0.0",
+  "description": "Design the account creation, login, database and authentication components for Bibliotech's latest product",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murraycatto/bibliotech.git"
+  },
+  "author": "Murray Catto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/murraycatto/bibliotech/issues"
+  },
+  "homepage": "https://github.com/murraycatto/bibliotech#readme"
+}
